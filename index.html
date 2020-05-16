@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>नेपाली support</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+</head>
+
+<body>
+    <div style="margin:40px">
+        <table id="datatable_wala_table" class="display nowrap dataTable cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> यो चाहि नेपाली </td>
+                    <td> yo chahi english </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Data</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#datatable_wala_table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'pdf',
+                    customize: function(doc) {
+                        processDoc(doc);
+                    }
+                },
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5'
+            ]
+        });
+    });
+
+    function processDoc(doc) {
+        pdfMake.fonts = {
+            Roboto: {
+                normal: 'Roboto-Regular.ttf',
+                bold: 'Roboto-Medium.ttf',
+                italics: 'Roboto-Italic.ttf',
+                bolditalics: 'Roboto-MediumItalic.ttf'
+            },
+            nepali: {
+                normal: 'nepali.ttf',
+                bold: 'nepali.ttf',
+                italics: 'nepali.ttf',
+                bolditalics: 'nepali.ttf'
+            }
+        };
+        doc.defaultStyle.font = "nepali";
+    }
+    </script>
+</body>
+
+</html>
